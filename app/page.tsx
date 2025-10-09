@@ -34,6 +34,15 @@ export default function Home() {
         </Link>
       </p>
 
+      <p>
+        <Link
+          href="/week-5"
+          className="text-blue-600 underline hover:text-blue-800"
+        >
+          Go to Week 5
+        </Link>
+      </p>
+
       <p className="text-gray-600">
         Additional info: This is my assignment project setup.
       </p>
