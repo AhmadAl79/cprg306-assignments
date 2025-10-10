@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 const CATEGORIES = [
-  "produce","dairy","bakery","meat","frozen foods",
-  "canned goods","dry goods","beverages","snacks","household","other",
+  "produce", "dairy", "bakery", "meat", "frozen foods",
+  "canned goods", "dry goods", "beverages", "snacks", "household", "other",
 ];
 
 export default function NewItem() {
@@ -20,14 +20,22 @@ export default function NewItem() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const item = { name: name.trim(), quantity, category };
+
     if (!item.name) return alert("Please enter an item name.");
-    alert(`New Item\nName: ${item.name}\nQuantity: ${item.quantity}\nCategory: ${item.category}`);
-    setName(""); setQuantity(MIN); setCategory("produce");
+
+    console.log(item); // ✅ shows the returned object in the browser console
+
+    alert(
+      `New Item\nName: ${item.name}\nQuantity: ${item.quantity}\nCategory: ${item.category}`
+    );
+
+    setName("");
+    setQuantity(MIN);
+    setCategory("produce");
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      
       <input
         aria-label="Item Name"
         placeholder="Item Name"
@@ -38,9 +46,7 @@ export default function NewItem() {
         type="text"
       />
 
-     
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-        
         <div className="flex items-center justify-center gap-3">
           <input
             aria-label="Quantity"
@@ -73,7 +79,6 @@ export default function NewItem() {
           </button>
         </div>
 
-        
         <select
           aria-label="Category"
           value={category}
@@ -88,7 +93,6 @@ export default function NewItem() {
         </select>
       </div>
 
-  
       <div className="flex justify-center">
         <button
           type="submit"
