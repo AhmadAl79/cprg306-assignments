@@ -8,7 +8,7 @@ const CATEGORIES = [
 ];
 
 export default function NewItem() {
-  const MIN = 1, MAX = 20;            
+  const MIN = 1, MAX = 20;
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(MIN);
   const [category, setCategory] = useState("produce");
@@ -23,7 +23,7 @@ export default function NewItem() {
 
     if (!item.name) return alert("Please enter an item name.");
 
-    console.log(item); // ✅ shows the returned object in the browser console
+    console.log(item); 
 
     alert(
       `New Item\nName: ${item.name}\nQuantity: ${item.quantity}\nCategory: ${item.category}`
@@ -48,15 +48,12 @@ export default function NewItem() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
         <div className="flex items-center justify-center gap-3">
-          <input
+          <p
             aria-label="Quantity"
-            value={quantity}
-            onChange={(e) => setQuantity(clamp(e.target.value))}
-            type="number"
-            min={MIN}
-            max={MAX}
-            className="w-20 text-center text-3xl font-bold rounded-lg border border-gray-800/60 px-2 py-1"
-          />
+            className="w-20 text-center text-3xl font-bold rounded-lg border border-gray-800/60 px-2 py-1 select-none"
+          >
+            {quantity}
+          </p>
 
           <button
             type="button"
@@ -79,6 +76,7 @@ export default function NewItem() {
           </button>
         </div>
 
+       
         <select
           aria-label="Category"
           value={category}
@@ -87,7 +85,7 @@ export default function NewItem() {
         >
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>
-              {c.split(" ").map(w => w[0].toUpperCase()+w.slice(1)).join(" ")}
+              {c.split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ")}
             </option>
           ))}
         </select>
