@@ -1,73 +1,55 @@
 /*
 Author: Ahmad Al Khodr
-Description: Week 6 - Custom ItemList Component
-Modified: 2025-10-15
+Description: Week 6 - ItemList (JSON + sorting)
+Modified: 2025-10-23
 */
 
 "use client";
 
 import { useState } from "react";
-import ItemData from "./items.json";
 import Item from "./item";
+import itemsData from "./items.json";
 
 export default function ItemList() {
-  const [sortBy, setSortBy] = useState("name");
-  const [items, setItems] = useState(ItemData);
+  const [sortBy, setSortBy] = useState("name"); 
 
-  const handleSortChange = (e) => {
-    setSortBy(e.target.value);
-  };
-
-  const handleSortClick = () => {
-    const sortedItems = [...items].sort(compareItems);
-    setItems(sortedItems);
-  };
-
-  const compareItems = (a, b) => {
+  const sorted = [...itemsData].sort((a, b) => {
     if (sortBy === "name") {
       return a.name.localeCompare(b.name);
     }
-
-    if (sortBy === "quantity") {
-      
-      return b.quantity - a.quantity;
-    }
-
     if (sortBy === "category") {
       return a.category.localeCompare(b.category);
     }
-
     return 0;
-  };
+  });
 
   return (
-    <div>
-      <div className="flex flex-col items-center text-center">
-        <p className="font-bold text-2xl">Sort By:</p>
-        <select
-          value={sortBy}
-          onChange={handleSortChange}
-          className="p-2 m-2 bg-gray-100 border border-gray-300 rounded-md"
-        >
-          <option value="name">Name</option>
-          <option value="quantity">Quantity</option>
-          <option value="category">Category</option>
-        </select>
+    <section className="max-w-xl mx-auto">
+      <div className="flex items-center justify-center gap-2 mb-4">
         <button
-          onClick={handleSortClick}
-          className="p-2 border bg-gray-100 hover:bg-green-100 border-gray-300 rounded-md"
+          onClick={() => setSortBy("name")}
+          className={`px-3 py-2 rounded border ${sortBy === "name" ? "bg-green-100" : "bg-gray-100"}`}
         >
-          Sort Items
+          Sort by Name
+        </button>
+        <button
+          onClick={() => setSortBy("category")}
+          className={`px-3 py-2 rounded border ${sortBy === "category" ? "bg-green-100" : "bg-gray-100"}`}
+        >
+          Sort by Category
         </button>
       </div>
 
-      <div className="flex justify-center mt-4">
-        <div className="grid grid-cols-1 w-1/3 text-center">
-          {items.map((item, index) => (
-            <Item key={index} props={item} />
-          ))}
-        </div>
-      </div>
-    </div>
+      <ul>
+        {sorted.map((it) => (
+          <Item
+            key={it.id}
+            name={it.name}
+            quantity={it.quantity}
+            category={it.category}
+          />
+        ))}
+      </ul>
+    </section>
   );
 }
