@@ -1,25 +1,20 @@
 /*
 Author: Ahmad Al Khodr
-Description: Week 6 - ItemList (JSON + sorting)
-Modified: 2025-10-15
+Description: Week 7 - ItemList (prop + sorting)
+Modified: 2025-10-23
 */
 
 "use client";
 
 import { useState } from "react";
 import Item from "./item";
-import itemsData from "./items.json";
 
-export default function ItemList() {
+export default function ItemList({ items }) {
   const [sortBy, setSortBy] = useState("name"); 
 
-  const sorted = [...itemsData].sort((a, b) => {
-    if (sortBy === "name") {
-      return a.name.localeCompare(b.name);
-    }
-    if (sortBy === "category") {
-      return a.category.localeCompare(b.category);
-    }
+  const sorted = [...items].sort((a, b) => {
+    if (sortBy === "name") return a.name.localeCompare(b.name);
+    if (sortBy === "category") return a.category.localeCompare(b.category);
     return 0;
   });
 
@@ -28,12 +23,14 @@ export default function ItemList() {
       <div className="flex items-center justify-center gap-2 mb-4">
         <button
           onClick={() => setSortBy("name")}
+          aria-pressed={sortBy === "name"}
           className={`px-3 py-2 rounded border ${sortBy === "name" ? "bg-green-100" : "bg-gray-100"}`}
         >
           Sort by Name
         </button>
         <button
           onClick={() => setSortBy("category")}
+          aria-pressed={sortBy === "category"}
           className={`px-3 py-2 rounded border ${sortBy === "category" ? "bg-green-100" : "bg-gray-100"}`}
         >
           Sort by Category
@@ -41,13 +38,8 @@ export default function ItemList() {
       </div>
 
       <ul>
-        {sorted.map((it) => (
-          <Item
-            key={it.id}
-            name={it.name}
-            quantity={it.quantity}
-            category={it.category}
-          />
+        {sorted.map(it => (
+          <Item key={it.id} name={it.name} quantity={it.quantity} category={it.category} />
         ))}
       </ul>
     </section>
