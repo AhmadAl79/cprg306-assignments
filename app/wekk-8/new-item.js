@@ -10,7 +10,7 @@ export default function NewItem({ onAddItem }) {
     category: "produce",
   });
 
-  // Generate unique ID for each item
+ 
   const generateId = () =>
     (globalThis.crypto?.randomUUID?.() ??
       (Date.now().toString(36) + Math.random().toString(36).slice(2))).toUpperCase();
@@ -23,7 +23,7 @@ export default function NewItem({ onAddItem }) {
     onAddItem(newItem);
     console.log("Added:", newItem);
 
-    // Reset form
+ 
     setItem({ id: "", name: "", quantity: 1, category: "produce" });
   }
 

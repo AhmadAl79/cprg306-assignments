@@ -14,8 +14,12 @@ export default function ItemList({ items, onItemSelect }) {
   return (
     <section className="max-w-xl mx-auto">
       <div className="flex gap-2 justify-center mb-3">
-        <button onClick={() => setSortBy("name")} className="border px-2 py-1 rounded">Sort by Name</button>
-        <button onClick={() => setSortBy("category")} className="border px-2 py-1 rounded">Sort by Category</button>
+        <button onClick={() => setSortBy("name")} className="border px-2 py-1 rounded">
+          Sort by Name
+        </button>
+        <button onClick={() => setSortBy("category")} className="border px-2 py-1 rounded">
+          Sort by Category
+        </button>
       </div>
 
       <ul>
@@ -32,3 +36,4 @@ export default function ItemList({ items, onItemSelect }) {
     </section>
   );
 }
+

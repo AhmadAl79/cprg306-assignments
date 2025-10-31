@@ -11,14 +11,14 @@ export default function Page() {
   const [selectedItemName, setSelectedItemName] = useState("");
 
   function handleAddItem(item) {
-    setItems((prev) => [...prev, { ...item, name: item.name.trim() }]);
+    setItems(prev => [...prev, { ...item, name: item.name.trim() }]);
   }
 
   function handleItemSelect(item) {
     const cleaned = item.name
       .split(",")[0]
       .trim()
-      .replace(/[^\p{L}\p{N}\s]/gu, ""); 
+      .replace(/[^\p{L}\p{N}\s]/gu, "");
     setSelectedItemName(cleaned);
   }
 
